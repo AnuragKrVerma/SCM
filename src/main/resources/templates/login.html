@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+  <head>
+    <title>Login</title>
+  </head>
+  <body>
+    <div id="content">
+      <div
+        class="p-4 mt-3 border-t-4 border-blue-500 bg-white dark:bg-gray-800 shadow-lg rounded-lg max-w-lg mx-auto"
+      >
+        <form
+          action="/authenticate"
+          class="max-w-sm mx-auto"
+          method="post"
+          novalidate
+        >
+          <input
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}"
+            type="hidden"
+          />
+
+          <div data-th-replace="~{message::messageBox}"></div>
+
+          <div class="mb-2">
+            <h1 class="text-4xl font-bold">Login Here</h1>
+            <p class="text-base font-normal mt-2">
+              Start managing contacts on cloud
+            </p>
+          </div>
+          <div class="text-sm text-red-600" th:if="${param.error}">
+            Invalid email and password.
+          </div>
+          <div>
+            <label
+              class="block mb-2 font-medium text-gray-900 dark:text-white"
+              for="email"
+              >Your email</label
+            >
+            <input
+              name="email"
+              autocomplete="email"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              id="email"
+              placeholder="name@abc.com"
+              required
+              type="email"
+            />
+            <!-- <p
+              class="text-red-600 py-2"
+              data-th-errors="*{email}"
+              data-th-if="${#fields.hasErrors('email')}"
+            ></p> -->
+          </div>
+
+          <div>
+            <label
+              class="block mb-2 font-medium text-gray-900 dark:text-white"
+              for="password"
+              >Your password</label
+            >
+            <input
+              name="password"
+              autocomplete="new-password"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              id="password"
+              required
+              type="password"
+            />
+            <!-- <p
+              class="text-red-600 py-2"
+              data-th-errors="*{password}"
+              data-th-if="${#fields.hasErrors('password')}"
+            ></p> -->
+          </div>
+
+          <div class="flex items-start mt-2 mb-5">
+            <div class="flex items-center h-5">
+              <input
+                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+                id="remember"
+                type="checkbox"
+                value=""
+              />
+            </div>
+            <label
+              class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              for="remember"
+              >Remember me</label
+            >
+          </div>
+          <div class="flex flex-col items-center justify-center">
+            <button
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              type="submit"
+            >
+              Submit
+            </button>
+
+            <div class="social-button-container mt-6">
+              <a
+                href="oauth2/authorization/google"
+                class="login-with-google-btn transition duration-300 ease-in-out py-3 px-6 pl-10 border-none rounded-md shadow-md text-gray-600 text-sm font-medium bg-white bg-no-repeat bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=')] bg-[length:18px_18px] bg-[position:12px_11px] hover:shadow-lg focus:outline-none focus:shadow-outline focus:ring-4 focus:ring-blue-300 active:bg-gray-200 disabled:filter-grayscale disabled:bg-gray-200 "
+              >
+                Login With Google
+              </a>
+
+              <a
+                type="button"
+                href="oauth2/authorization/github"
+                class="py-2 my-4 w-max px-4 max-w-md flex justify-center items-center bg-gray-600 hover:bg-gray-700 focus:ring-gray-500 focus:ring-offset-gray-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  class="mr-2"
+                  viewBox="0 0 1792 1792"
+                >
+                  <path
+                    d="M896 128q209 0 385.5 103t279.5 279.5 103 385.5q0 251-146.5 451.5t-378.5 277.5q-27 5-40-7t-13-30q0-3 .5-76.5t.5-134.5q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-119-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-85-13.5q-45 113-8 204-79 87-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-39 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 88.5t.5 54.5q0 18-13 30t-40 7q-232-77-378.5-277.5t-146.5-451.5q0-209 103-385.5t279.5-279.5 385.5-103zm-477 1103q3-7-7-12-10-3-13 2-3 7 7 12 9 6 13-2zm31 34q7-5-2-16-10-9-16-3-7 5 2 16 10 10 16 3zm30 45q9-7 0-19-8-13-17-6-9 5 0 18t17 7zm42 42q8-8-4-19-12-12-20-3-9 8 4 19 12 12 20 3zm57 25q3-11-13-16-15-4-19 7t13 15q15 6 19-6zm63 5q0-13-17-11-16 0-16 11 0 13 17 11 16 0 16-11zm58-10q-2-11-18-9-16 3-14 15t18 8 14-14z"
+                  ></path>
+                </svg>
+                Sign in with GitHub
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      console.log("Login page");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Logout</title>
+  </head>
+  <body>
+    <div id="content">
+    <div class="logout-container text-center mt-10">
+      <h1 class="text-2xl font-bold mb-4">You have been logged out</h1>
+      <p class="mb-4">Thank you for using our service.</p>
+      <p>
+        <a
+        href="/login"
+        class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300 ease-in-out"
+        >Click here</a
+        >
+        to log in again.
+      </p>
+    </div>
+    </div>
+    <script>
+      console.log("Logout");
+    </script>
+  </body>
+</html>
